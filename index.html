@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ZYN Control Panel</title>
+  <style>
+    body { background-color:black; color:lime; font-family:monospace; padding:20px; }
+    input, button { font-family:monospace; padding:8px; margin:5px 0; border:none; border-radius:4px; }
+    input[type="text"] { width:300px; }
+    button { background:lime; color:black; font-weight:bold; cursor:pointer; }
+    #log { white-space:pre-wrap; background:#111; padding:10px; margin-top:20px; border:1px solid lime; }
+  </style>
+</head>
+<body>
+  <h1>🔥 ZYN BOTNET PANEL 🔥</h1>
+  <form onsubmit="startAttack(event)">
+    <label for="target">🎯 Masukkan Link Target:</label><br>
+    <input type="text" id="target" name="target" placeholder="https://contoh.com" required><br>
+    <button type="submit">💣 MULAI SERANG</button>
+  </form>
+  <div id="log">⚡ Siap tempur bro ZYN...</div>
+
+  <script>
+    function startAttack(e) {
+      e.preventDefault();
+      const target = document.getElementById("target").value;
+      const formData = new FormData();
+      formData.append("target", target);
+      fetch("/start", { method: "POST", body: formData })
+        .then(res => res.text())
+        .then(txt => document.getElementById("log").textContent = txt)
+        .catch(err => document.getElementById("log").textContent = "❌ Gagal: " + err);
+    }
+  </script>
+</body>
+</html>
